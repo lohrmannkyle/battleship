@@ -79,8 +79,6 @@ class Board:
         ship = gridpos.ship()
         if ship:
             ship.hit(gridpos.guessed())
-            if not gridpos.guessed():
-                gridpos.mark_guessed()
             if ship.sunk():
                 self._ships.pop(ship.get_type())
                 print("{} sunk".format(ship))
@@ -93,6 +91,9 @@ class Board:
             if gridpos.guessed():
                 string += " (again)"
             print(string)
+            
+        if not gridpos.guessed():
+            gridpos.mark_guessed()
     
     def add_ship_to_grid(self, ship, i, j):
         return self.get_gridpos(i,j).add_ship(ship)
@@ -112,10 +113,13 @@ class Ship:
         self._remaining = self._size
     
     def hit(self, guessed):
-        self._remaining -= 1
+        
         string = "hit"
         if guessed:
             string += " (again)"
+        else:
+            self._remaining -= 1
+
         if self._remaining != 0:
             print(string)
 
