@@ -116,7 +116,8 @@ class Ship:
         string = "hit"
         if guessed:
             string += " (again)"
-        print(string)
+        if self._remaining != 0:
+            print(string)
 
     def get_type(self):
         return self._type
