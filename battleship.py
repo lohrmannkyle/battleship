@@ -148,10 +148,10 @@ class Ship:
 def gen_board(placement_file):
     board = Board()
     for line in placement_file:
-        line = line.split()
-        type = line[0]
-        start_x, stop_x = int(line[1]) ,int(line[3])
-        start_y, stop_y = int(line[2]), int(line[4])
+        split = line.split()
+        type = split[0]
+        start_x, stop_x = int(split[1]) ,int(split[3])
+        start_y, stop_y = int(split[2]), int(split[4])
 
         if max(start_x, stop_x, start_y, stop_y) > 9 or \
             min(start_x, stop_x, start_y, stop_y) < 0:
