@@ -218,12 +218,12 @@ class Ship:
 
         if stop_x == start_x:
             for i in range(start_y, stop_y + 1):
-                self._occupies.append(start_x,i)
+                self._occupies.append((start_x,i))
                 board_obj.add_ship_to_grid(self, start_x, i)
 
         elif start_y == stop_y:
             for i in range(start_x, stop_x + 1):
-                self._occupies.append(i ,start_y)
+                self._occupies.append((i ,start_y))
                 overlap = not board_obj.add_ship_to_grid(self, i, start_y)
                 if overlap:
                     print("ERROR: overlapping ship: " + line)
