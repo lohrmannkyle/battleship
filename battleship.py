@@ -77,9 +77,10 @@ class Board:
 
         gridpos = self.get_gridpos(x,y)
         ship = gridpos.ship()
-        if ship and not gridpos.guessed():
-            ship.hit(x,y)
-            gridpos.mark_guessed()
+        if ship:
+            ship.hit(gridpos.guessed())
+            if not gridpos.guessed():
+                gridpos.mark_guessed()
             if ship.sunk():
                 self._ships.pop(ship.get_type())
                 print("{} sunk".format(ship))
@@ -88,8 +89,10 @@ class Board:
                 print("all ships sunk: game over") 
                 sys.exit(0)
         else:
-            print("miss")
-        return False
+            string = "miss"
+            if gridpos.guessed():
+                string += " (again)"
+            print(string)
     
     def add_ship_to_grid(self, ship, i, j):
         return self.get_gridpos(i,j).add_ship(ship)
@@ -101,7 +104,6 @@ class Board:
         self._ships[ship.get_type()] = ship
 
 
-
 class Ship:
     def __init__(self, type):
         self._type = type
@@ -109,9 +111,12 @@ class Ship:
         self._occupies = []
         self._remaining = self._size
     
-    def hit(self, x, y):
+    def hit(self, guessed):
         self._remaining -= 1
-        print("hit")
+        string = "hit"
+        if guessed:
+            sting += " (again)"
+        print(string)
 
     def get_type(self):
         return self._type
@@ -137,7 +142,7 @@ class Ship:
                     print("ERROR: overlapping ship: " + line)
                     sys.exit(0)  
         else:
-            "ERROR: ship not horizontal or vertical: " + line
+            print("ERROR: ship not horizontal or vertical: " + line)
             sys.exit(0)
 
         board_obj.add_ship_to_ships(self)
