@@ -115,7 +115,7 @@ class Ship:
         self._remaining -= 1
         string = "hit"
         if guessed:
-            sting += " (again)"
+            string += " (again)"
         print(string)
 
     def get_type(self):
