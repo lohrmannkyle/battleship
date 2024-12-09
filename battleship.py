@@ -7,6 +7,12 @@ class GridPos:
     Represents a grid square on the game board. 
     Each grid squares has an x and a y value, can store a ship, 
     and tracks if it has been guessed already
+    Notable methods:
+        add_ship() which adds a ship object to the grid square as long as
+            the gridsquare doesn't have an assigned ship already.
+        to_str() which returns either the coordinates of the gridsquare if
+            no ship present, or the ships type "A|B|S|D|P"  
+        Every other method is a setter/getter
     """
     def __init__(self, x, y):
         """
@@ -54,6 +60,13 @@ class Board:
     Represents the game board which is always a (10x10) grid.
     Contains a dictionary of each ship that exists on the board.
     Tracks if more than one of a ship type exists and if so exits the program.
+    Notable Methods:
+        gen_board() which creates a board of size 10x10 and assigns to
+             _board variable
+        valid_guess() performs error validation on guesses for correctness
+        guess() performs the guess and determines if a hit/miss. Calls
+            Ship.hit()
+        to_str() allows printing the entire board
     """
     def __init__(self):
         """ contructor for board, no params """
@@ -116,14 +129,16 @@ class Board:
             return 
 
         gridpos = self.get_gridpos(x,y)
-        ship = gridpos.ship()
+        ship = gridpos.ship() 
         if ship:
+            # hit reduces a life from ship if guessed is False
             ship.hit(gridpos.guessed())
             if ship.sunk():
                 self._ships.pop(ship.get_type())
                 print("{} sunk".format(ship))
             
             if self.game_over():
+                # each guess performs a check to see if the game is over
                 print("all ships sunk: game over") 
                 sys.exit(0)
         else:
@@ -164,6 +179,11 @@ class Ship:
         the length of the occupies list which stores tuples of each coordinate
         the ship exists on is checked against the proper ship size. If they
         don't match the program exits. Game must start with 5 unique ships.
+        Notable Methods: 
+        hit() removes a life from ship if not already guessed. Called by
+            GirdPos.guess()
+        place() places a ship on the board and verifies within boundaries of 
+            board
     """
     def __init__(self, type):
         """

@@ -1,0 +1,36 @@
+# Test 1 (error)
+# Validates that program exits on duplicates ship type
+Using an input file that creates two of the same ship like such:
+    A 6 0 6 4
+    S 6 5 6 7
+    B 2 7 5 7
+    D 3 4 3 6
+    D 4 4 4 6
+# End of test
+
+# Test 2 (error)
+# Validates that the program exits upon creating less than 5 unique ships
+Input is an input file that generates less than 5 of differing ship types like such:
+    A 6 0 6 4
+    S 6 5 6 7
+    B 2 7 5 7
+    D 3 4 3 6
+# End of test
+
+
+# Test 3 (regular)
+# Validates game ends without errors upon no more guesses but ships remaining
+    Guess input has less than enough guess to sink all ships
+# End of test
+
+# Test 4 (regular)
+# Validates games exits and prints "all ships sunk: game over" upon sinking all ships
+    Guess file contains enough guesses that sink all ships
+# End of test
+
+# Test 5 (error)
+# Validates ships must match the required ship length for each type
+Ship input file contains a ship that doesn't match required specification
+for example:
+    D 4 4 4 7 (size of 4 when should be 3)
+# End of test
