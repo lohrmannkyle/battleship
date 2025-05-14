@@ -18,7 +18,36 @@ It then processes each guess and provides feedback based on whether it results i
 
 Run the program and enter the filenames when prompted:
 
+## Example Run
 ```bash
-$ python battleship.py
+(base) MacBook-Pro long % python battleship.py 
 example-placement.txt
 example-guess.txt
+hit
+hit
+miss
+miss
+hit
+illegal guess
+hit
+hit
+A sunk
+miss
+hit
+miss
+hit
+hit
+B sunk
+hit
+P sunk
+hit
+miss
+D sunk
+miss
+illegal guess
+hit
+miss
+hit
+S sunk
+all ships sunk: game over
+
