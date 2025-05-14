@@ -20,3 +20,5 @@ Run the program and enter the filenames when prompted:
 
 ```bash
 $ python battleship.py
+example-placement.txt
+example-guess.txt
